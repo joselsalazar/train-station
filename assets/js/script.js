@@ -19,7 +19,7 @@ var e = 0;
 var ide = [];
 
 
-$('#submit-train').click(function() {
+function sendtoFB() {
 	trainName = $("#train-name").val().trim();
 	destination = $("#destination").val().trim();
 	firstTrainTime = $("#first-train").val().trim();
@@ -29,7 +29,7 @@ $('#submit-train').click(function() {
 		destination:destination,
 		firstTrainTime:firstTrainTime
 	});
-});
+};
 
 // Time Converter
 function timeConvert(sec) {
@@ -46,7 +46,7 @@ database.ref().on("child_added", function(snapshot) {
 	$('.train-div').append(newRow);
 	newRow.append("<td>" + snapshot.val().trainName + "</td>");
 	newRow.append("<td>" + snapshot.val().destination + "</td>");
-	newRow.append("<td>" + times + "</td>");
+	newRow.append("<td>" + moment(times, "hmm").format("HH:mm") + "</td>");
 	var lastRow = $('<td class="last">');
 	newRow.append(lastRow);
 
