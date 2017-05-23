@@ -63,6 +63,7 @@ database.ref().on("child_added", function(snapshot) {
   console.log("The read failed: " + errorObject.code);
 });
 
+
 // Show's Time Live
 function showTime() {
 	$('.current-time').html(moment().format('MMMM Do YYYY, h:mm:ss a'));
