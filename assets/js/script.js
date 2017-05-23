@@ -46,7 +46,7 @@ database.ref().on("child_added", function(snapshot) {
 	$('.train-div').append(newRow);
 	newRow.append("<td>" + snapshot.val().trainName + "</td>");
 	newRow.append("<td>" + snapshot.val().destination + "</td>");
-	newRow.append("<td>" + moment(times, "hmm").format("HH:mm") + "</td>");
+	newRow.append("<td>" + times + "</td>");
 	var lastRow = $('<td class="last">');
 	newRow.append(lastRow);
 
@@ -70,3 +70,6 @@ function showTime() {
 }
 showTime();
 setInterval(showTime, 1000);
+
+// To-Do
+// Add Remove Child Functionality
