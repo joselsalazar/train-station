@@ -15,9 +15,10 @@ var trainName = "";
 var destination = "";
 var firstTrainTime = "";
 var frequency = "";
-var e = 0;
 var ide = [];
-
+var e = 0;
+var buttonCycle = "";
+var buttonClass = "";
 
 function sendtoFB() {
 	trainName = $("#train-name").val().trim();
@@ -43,12 +44,15 @@ database.ref().on("child_added", function(snapshot) {
 	console.log(snapshot.val());
 	var times = snapshot.val().firstTrainTime;
 	var newRow = $('<tr>');
+	newRow.addClass("row" + e);
 	$('.train-div').append(newRow);
-	newRow.append("<td>" + snapshot.val().trainName + "</td>");
-	newRow.append("<td>" + snapshot.val().destination + "</td>");
-	newRow.append("<td>" + times + "</td>");
+	newRow.append("<td class='train-name'>" + snapshot.val().trainName + "</td>");
+	newRow.append("<td class='destination'>" + snapshot.val().destination + "</td>");
+	newRow.append('<td class="first-train">' + times + "</td>");
 	var lastRow = $('<td class="last">');
 	newRow.append(lastRow);
+	newRow.append('<button class="row' + e + '">Delete</button>');
+	e++;
 
 	function liveTime() {
 		var momentTime = moment(times, "HH:mm").diff(moment(), "seconds");
@@ -59,6 +63,19 @@ database.ref().on("child_added", function(snapshot) {
 	}
 	liveTime();
 	setInterval(liveTime, 1000);
+
+	for (var i = 0; i < e; i++) {
+		var buttonCycle = $('.row' + i + ' button');
+		var buttonClass = buttonCycle.attr("class");
+	}
+
+	$(buttonCycle).click(function() {
+		$('tr.' + buttonClass).remove();
+
+		// database.ref().remove({
+			
+		// });
+	});
 }, function(errorObject) {
   console.log("The read failed: " + errorObject.code);
 });
@@ -71,5 +88,5 @@ function showTime() {
 showTime();
 setInterval(showTime, 1000);
 
-// To-Do
-// Add Remove Child Functionality
+
+
