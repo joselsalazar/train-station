@@ -71,10 +71,6 @@ database.ref().on("child_added", function(snapshot) {
 
 	$(buttonCycle).click(function() {
 		$('tr.' + buttonClass).remove();
-
-		// database.ref().remove({
-			
-		// });
 	});
 }, function(errorObject) {
   console.log("The read failed: " + errorObject.code);
